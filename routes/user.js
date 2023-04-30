@@ -26,14 +26,15 @@ exports.leaderboards = function(req, res, next) {
     if (err) {
       return next(err);
     }
-    usersClient.sort(utils.sortParams(0), function(err, timesresults) {
-      if (err) {
-        return next(err);
-      }
-      const leaderboards = utils.buildLeaderboards(pointsresults, timesresults);
-      res.locals.slogan = utils.randomSlogan();
-      res.render('leaderboards', leaderboards);
-    });
+    // usersClient.sort(utils.sortParams(0), function(err, timesresults) {
+    //   if (err) {
+    //     return next(err);
+    //   }
+    //   const leaderboards = utils.buildLeaderboards(pointsresults, timesresults);
+    //   res.locals.slogan = utils.randomSlogan();
+    //   res.render('leaderboards', leaderboards);
+    // });
+    res.render('leaderboards', utils.buildLeaderboards([], []));
   });
 };
 
@@ -57,12 +58,13 @@ exports.sliceLeaderboard = function(req, res, next) {
     });
     return;
   }
-  usersClient.sort(utils.sortParams(begin), function(err, results) {
-    if (err) {
-      return next(err);
-    }
-    res.send(results);
-  });
+  // usersClient.sort(utils.sortParams(begin), function(err, results) {
+  //   if (err) {
+  //     return next(err);
+  //   }
+  //   res.send(results);
+  // });
+  res.send([]);
 };
 
 /**
