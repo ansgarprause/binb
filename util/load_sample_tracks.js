@@ -7,7 +7,7 @@ const limit = 7; // The number of songs to retrieve for each artist
 const parser = JSONStream.parse(['results', true]);
 const popIds = artistIds.pop;
 const rapIds = artistIds.rap;
-const rc = require('redis').createClient();
+const { songsClient } = require('../lib/redis-clients');
 const rockIds = artistIds.rock;
 let rooms = require('../config').rooms;
 let score;
@@ -56,7 +56,7 @@ parser.on('data', function(track) {
     return;
   }
 
-  rc.hmset(
+  songsClient.hmset(
     'song:' + songId,
     'artistName',
     track.artistName,
@@ -74,7 +74,7 @@ parser.on('data', function(track) {
 
   rooms.forEach(function(room) {
     const _score = room === 'mixed' ? songId : score;
-    rc.zadd(room, _score, songId);
+    songsClient.zadd(room, _score, songId);
   });
 
   score++;
@@ -82,11 +82,11 @@ parser.on('data', function(track) {
 });
 
 parser.on('end', function() {
-  rc.quit();
+  songsClient.quit();
   process.stdout.write('OK\n');
 });
 
-rc.del(rooms, function(err) {
+songsClient.del(rooms, function(err) {
   if (err) {
     throw err;
   }

@@ -2,7 +2,7 @@
 
 const Captcha = require('../lib/captcha');
 const config = require('../config');
-const db = require('../lib/redis-clients').songs;
+const { songsClient } = require('../lib/redis-clients');
 const http = require('http');
 const parallel = require('async/parallel');
 const randInt = require('../lib/prng').randInt;
@@ -16,11 +16,11 @@ const rooms = require('../lib/rooms').rooms;
 const subTask = function(genre) {
   return function(callback) {
     const index = randInt(rooms[genre].trackscount);
-    db.zrange([genre, index, index], function(err, res) {
+    songsClient.zrange([genre, index, index], function(err, res) {
       if (err) {
         return callback(err);
       }
-      db.hget(['song:' + res[0], 'artworkUrl100'], callback);
+      songsClient.hget(['song:' + res[0], 'artworkUrl100'], callback);
     });
   };
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 const crypto = require('crypto');
-const db = require('../lib/redis-clients').users;
+const { usersClient } = require('../lib/redis-clients');
 const http = require('http');
 const mailer = require('../lib/email/mailer');
 const rooms = require('../config').rooms;
@@ -22,11 +22,11 @@ for (let i = 0; i < rooms.length; i++) {
  */
 
 exports.leaderboards = function(req, res, next) {
-  db.zrevrange(['users', 0, 29, 'withscores'], function(err, pointsresults) {
+  usersClient.zrevrange(['users', 0, 29, 'withscores'], function(err, pointsresults) {
     if (err) {
       return next(err);
     }
-    db.sort(utils.sortParams(0), function(err, timesresults) {
+    usersClient.sort(utils.sortParams(0), function(err, timesresults) {
       if (err) {
         return next(err);
       }
@@ -49,7 +49,7 @@ exports.sliceLeaderboard = function(req, res, next) {
   }
   const end = begin + 29;
   if (by === 'points') {
-    db.zrevrange(['users', begin, end, 'withscores'], function(err, results) {
+    usersClient.zrevrange(['users', begin, end, 'withscores'], function(err, results) {
       if (err) {
         return next(err);
       }
@@ -57,7 +57,7 @@ exports.sliceLeaderboard = function(req, res, next) {
     });
     return;
   }
-  db.sort(utils.sortParams(begin), function(err, results) {
+  usersClient.sort(utils.sortParams(begin), function(err, results) {
     if (err) {
       return next(err);
     }
@@ -101,7 +101,7 @@ exports.validateChangePasswd = function(req, res, next) {
 
 exports.checkOldPasswd = function(req, res, next) {
   const key = 'user:' + req.session.user;
-  db.hmget([key, 'salt', 'password'], function(err, data) {
+  usersClient.hmget([key, 'salt', 'password'], function(err, data) {
     if (err) {
       return next(err);
     }
@@ -131,7 +131,7 @@ exports.changePasswd = function(req, res, next) {
     .update(salt + req.body.newpassword)
     .digest('hex');
 
-  db.hmset([key, 'salt', salt, 'password', digest], function(err) {
+  usersClient.hmset([key, 'salt', salt, 'password', digest], function(err) {
     if (err) {
       return next(err);
     }
@@ -172,7 +172,7 @@ exports.validateLogin = function(req, res, next) {
 
 exports.checkUser = function(req, res, next) {
   const key = 'user:' + req.body.username;
-  db.exists([key], function(err, exists) {
+  usersClient.exists([key], function(err, exists) {
     if (err) {
       return next(err);
     }
@@ -189,7 +189,7 @@ exports.checkUser = function(req, res, next) {
 
 exports.authenticate = function(req, res, next) {
   const key = 'user:' + req.body.username;
-  db.hmget([key, 'salt', 'password'], function(err, data) {
+  usersClient.hmget([key, 'salt', 'password'], function(err, data) {
     if (err) {
       return next(err);
     }
@@ -278,7 +278,7 @@ exports.validateSignUp = function(req, res, next) {
 
 exports.userExists = function(req, res, next) {
   const key = 'user:' + req.body.username;
-  db.exists([key], function(err, exists) {
+  usersClient.exists([key], function(err, exists) {
     if (err) {
       return next(err);
     }
@@ -293,7 +293,7 @@ exports.userExists = function(req, res, next) {
 
 exports.emailExists = function(req, res, next) {
   const key = 'email:' + req.body.email;
-  db.exists([key], function(err, exists) {
+  usersClient.exists([key], function(err, exists) {
     if (err) {
       return next(err);
     }
@@ -321,7 +321,7 @@ exports.createAccount = function(req, res, next) {
   delete req.session.oldvalues;
 
   // Add new user in the db
-  const multi = db.multi();
+  const multi = usersClient.multi();
   multi.hmset(userkey, user);
   multi.set(mailkey, userkey);
   multi.zadd('users', 0, req.body.username);
@@ -369,7 +369,7 @@ exports.validateRecoverPasswd = function(req, res, next) {
 
 exports.sendEmail = function(req, res, next) {
   const key = 'email:' + req.body.email;
-  db.get([key], function(err, data) {
+  usersClient.get([key], function(err, data) {
     if (err) {
       return next(err);
     }
@@ -379,7 +379,7 @@ exports.sendEmail = function(req, res, next) {
       // Email exists, generate a secure random token
       const token = crypto.randomBytes(48).toString('hex');
       // Token expires after 4 hours
-      db.setex(['token:' + token, 14400, data], function(err) {
+      usersClient.setex(['token:' + token, 14400, data], function(err) {
         if (err) {
           return next(err);
         }
@@ -431,19 +431,19 @@ exports.resetPasswd = function(req, res, next) {
   }
 
   const key = 'token:' + req.query.token;
-  db.get([key], function(err, user) {
+  usersClient.get([key], function(err, user) {
     if (err) {
       return next(err);
     }
     if (user) {
-      db.del(key); // Delete the token
+      usersClient.del(key); // Delete the token
       const salt = crypto.randomBytes(6).toString('base64');
       const digest = crypto
         .createHash('sha256')
         .update(salt + req.body.password)
         .digest('hex');
 
-      db.hmset([user, 'salt', salt, 'password', digest], function(err) {
+      usersClient.hmset([user, 'salt', salt, 'password', digest], function(err) {
         if (err) {
           return next(err);
         }
@@ -466,12 +466,12 @@ exports.resetPasswd = function(req, res, next) {
 
 exports.profile = function(req, res, next) {
   const key = 'user:' + req.params.username;
-  db.exists([key], function(err, exists) {
+  usersClient.exists([key], function(err, exists) {
     if (err) {
       return next(err);
     }
     if (exists) {
-      db.hgetall([key], function(err, user) {
+      usersClient.hgetall([key], function(err, user) {
         if (err) {
           return next(err);
         }

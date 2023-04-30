@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser')(secret);
 const site = require('./routes/site');
 const urlencoded = require('body-parser').urlencoded;
 const user = require('./routes/user');
-const usersdb = require('./lib/redis-clients').users;
+const { usersClient } = require('./lib/redis-clients');
 
 /**
  * Setting up Express.
@@ -22,7 +22,7 @@ const usersdb = require('./lib/redis-clients').users;
 const app = express();
 const production = process.env.NODE_ENV === 'production';
 const pub = __dirname + '/public'; // Path to public directory
-const sessionstore = new RedisStore({ client: usersdb });
+const sessionstore = new RedisStore({ client: usersClient });
 const server = http.createServer(app); // HTTP server object
 
 // Configuration
