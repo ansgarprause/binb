@@ -2,7 +2,7 @@
 
 binb is a simple, realtime, multiplayer, competitive music listening game.
 
-To play the game: [https://binb.co](https://binb.co)
+To play the game: [https://binb.fly.dev](https://binb.fly.dev)
 
 ## Installation
 
