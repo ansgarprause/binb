@@ -34,5 +34,8 @@
     "serve-favicon": "^2.5.0",
     "uglify-js": "^3.5.4",
     "ws": "^7.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
   }
 }

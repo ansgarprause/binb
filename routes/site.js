@@ -13,10 +13,10 @@ const rooms = require('../lib/rooms').rooms;
  * Generate a sub-task.
  */
 
-const subTask = function(genre) {
-  return function(callback) {
+const subTask = function (genre) {
+  return function (callback) {
     const index = randInt(rooms[genre].trackscount);
-    songsClient.zrange([genre, index, index], function(err, res) {
+    songsClient.zrange([genre, index, index], function (err, res) {
       if (err) {
         return callback(err);
       }
@@ -29,10 +29,10 @@ const subTask = function(genre) {
  * Extract at random in each room, some album covers and return the result as a JSON.
  */
 
-exports.artworks = function(req, res, next) {
+exports.artworks = function (req, res, next) {
   const tasks = {};
-  config.rooms.forEach(function(room) {
-    tasks[room] = function(callback) {
+  config.rooms.forEach(function (room) {
+    tasks[room] = function (callback) {
       const subtasks = [];
       for (let i = 0; i < 6; i++) {
         subtasks.push(subTask(room));
@@ -40,7 +40,7 @@ exports.artworks = function(req, res, next) {
       parallel(subtasks, callback);
     };
   });
-  parallel(tasks, function(err, results) {
+  parallel(tasks, function (err, results) {
     if (err) {
       return next(err);
     }
@@ -48,7 +48,7 @@ exports.artworks = function(req, res, next) {
   });
 };
 
-exports.changePasswd = function(req, res) {
+exports.changePasswd = function (req, res) {
   if (!req.session.user) {
     return res.redirect('/login?followup=/changepasswd');
   }
@@ -59,7 +59,7 @@ exports.changePasswd = function(req, res) {
   });
 };
 
-exports.home = function(req, res) {
+exports.home = function (req, res) {
   res.render('home', {
     loggedin: req.session.user,
     rooms: config.rooms,
@@ -67,14 +67,14 @@ exports.home = function(req, res) {
   });
 };
 
-exports.login = function(req, res) {
+exports.login = function (req, res) {
   res.render('login', {
     followup: req.query.followup || '/',
     slogan: randomSlogan()
   });
 };
 
-exports.recoverPasswd = function(req, res) {
+exports.recoverPasswd = function (req, res) {
   const captcha = new Captcha();
   req.session.captchacode = captcha.getCode();
   res.render('recoverpasswd', {
@@ -84,14 +84,14 @@ exports.recoverPasswd = function(req, res) {
   });
 };
 
-exports.resetPasswd = function(req, res) {
+exports.resetPasswd = function (req, res) {
   res.render('resetpasswd', {
     slogan: randomSlogan(),
     token: req.query.token || ''
   });
 };
 
-exports.room = function(req, res) {
+exports.room = function (req, res) {
   if (~config.rooms.indexOf(req.params.room)) {
     return res.render('room', {
       loggedin: req.session.user,
@@ -103,7 +103,7 @@ exports.room = function(req, res) {
   res.status(404).send(http.STATUS_CODES[404]);
 };
 
-exports.signup = function(req, res) {
+exports.signup = function (req, res) {
   const captcha = new Captcha();
   req.session.captchacode = captcha.getCode();
   res.render('signup', {
@@ -117,7 +117,7 @@ exports.signup = function(req, res) {
  * Report errors during form submission.
  */
 
-exports.validationErrors = function(req, res, next) {
+exports.validationErrors = function (req, res, next) {
   res.locals.errors = req.session.errors;
   res.locals.oldvalues = req.session.oldvalues;
   delete req.session.errors;

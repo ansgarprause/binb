@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   var $cassettewheels = $('#cassette .wheel');
@@ -34,7 +34,8 @@
   var roundpoints = 0;
   var subscriber = false;
   var timer;
-  var urlregex = /(https?:\/\/[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|])/;
+  var urlregex =
+    /(https?:\/\/[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|])/;
   var users = [];
   var userscounters = {};
 
@@ -96,7 +97,7 @@
     'Yes, you guessed the title. Who is the artist?'
   ];
 
-  var addCassetteBackdrop = function() {
+  var addCassetteBackdrop = function () {
     var html = [
       '<div id="touch-backdrop">',
       '<button id="touch-play" class="btn btn-danger disabled">',
@@ -109,7 +110,7 @@
     $touchbackdrop.appendTo('#cassette');
 
     $touchplay = $('#touch-play');
-    $touchplay.on('click', function() {
+    $touchplay.on('click', function () {
       if (!$(this).hasClass('btn-danger')) {
         audio.currentTime = elapsedtime;
         audio.play();
@@ -120,27 +121,27 @@
   };
 
   // Add a chat entry, whether message, notification, etc.
-  var addChatEntry = function($childNode) {
+  var addChatEntry = function ($childNode) {
     var $entry = $('<li class="entry"></li>');
     $entry.append($childNode);
     $chat.append($entry);
     $chat[0].scrollTop = $chat[0].scrollHeight;
   };
 
-  var addFeedback = function(txt, style) {
+  var addFeedback = function (txt, style) {
     $feedback.removeClass().text(txt);
 
     if (style) {
       $feedback.addClass(style);
       $guessbox.addClass(style);
 
-      setTimeout(function() {
+      setTimeout(function () {
         $guessbox.removeClass(style);
       }, 350);
     }
   };
 
-  var addPrivate = function(usrname) {
+  var addPrivate = function (usrname) {
     $messagebox.focus();
 
     if (pvtmsgto) {
@@ -157,11 +158,11 @@
     $recipient.text('To ' + usrname + ':');
     var width = $recipient.outerWidth(true) + 1;
     $recipient.hide();
-    $messagebox.animate({ width: '-=' + width + 'px' }, 'fast', function() {
+    $messagebox.animate({ width: '-=' + width + 'px' }, 'fast', function () {
       $recipient.show();
     });
 
-    var $el = $('.name').filter(function() {
+    var $el = $('.name').filter(function () {
       return $(this).text() === usrname;
     });
     $el.prevAll('.private').show();
@@ -169,7 +170,7 @@
   };
 
   // Add track info
-  var addTrackInfo = function(data) {
+  var addTrackInfo = function (data) {
     if ($touchplay) {
       $touchplay.removeClass('btn-success').addClass('btn-danger disabled');
       $touchplay.html('<i class="icon-play icon-white"></i> Wait');
@@ -210,7 +211,7 @@
     $tracks.prepend(html);
   };
 
-  var addVolumeControl = function() {
+  var addVolumeControl = function () {
     var html = [
       '<div id="volume-button">',
       '<a class="button">',
@@ -237,7 +238,7 @@
 
     $volumebutton.appendTo('#volume');
 
-    var handleIcon = function(volume) {
+    var handleIcon = function (volume) {
       if (volume === 0) {
         $icon.removeClass().addClass('icons volume-none');
       } else if (volume <= 0.33) {
@@ -249,7 +250,7 @@
       }
     };
 
-    var handleVolumeMove = function(e) {
+    var handleVolumeMove = function (e) {
       var railheight = $volumetotal.height();
       var totaloffset = $volumetotal.offset();
       var totalTop = parseInt($volumetotal.css('top').replace(/px/, ''), 10);
@@ -274,7 +275,7 @@
       setVolume(volume);
     };
 
-    var positionVolumeHandle = function(volume) {
+    var positionVolumeHandle = function (volume) {
       if (!$volumeslider.is(':visible')) {
         $volumeslider.show();
         positionVolumeHandle(volume);
@@ -293,21 +294,21 @@
       );
     };
 
-    var setCookie = function(volume) {
+    var setCookie = function (volume) {
       var d = new Date();
       d.setTime(d.getTime() + 31536000000); // One year in milliseconds
       document.cookie =
         'volume=' + volume + ';path=/;expires=' + d.toGMTString() + ';';
     };
 
-    var setVolume = function(volume) {
+    var setVolume = function (volume) {
       handleIcon(volume);
       audio.volume = volume;
       oldvalue = volume;
       setCookie(volume);
     };
 
-    $volumebutton.find('.button').on('click', function() {
+    $volumebutton.find('.button').on('click', function () {
       if (!clicked) {
         clicked = true;
 
@@ -329,11 +330,11 @@
     });
 
     $volumebutton.hover(
-      function() {
+      function () {
         mouseisover = true;
         $volumeslider.show();
       },
-      function() {
+      function () {
         mouseisover = false;
         if (!mouseisdown) {
           $volumeslider.hide();
@@ -342,29 +343,29 @@
     );
 
     $volumeslider
-      .on('mouseover', function() {
+      .on('mouseover', function () {
         mouseisover = true;
       })
-      .on('mousedown', function(e) {
+      .on('mousedown', function (e) {
         handleVolumeMove(e);
         mouseisdown = true;
         return false;
       });
 
     $(document)
-      .on('mouseup', function() {
+      .on('mouseup', function () {
         mouseisdown = false;
         if (!mouseisover) {
           $volumeslider.hide();
         }
       })
-      .on('mousemove', function(e) {
+      .on('mousemove', function (e) {
         if (mouseisdown) {
           handleVolumeMove(e);
         }
       });
 
-    (function() {
+    (function () {
       if (/volume\s*=/.test(document.cookie)) {
         var value = document.cookie.replace(/.*volume\s*=\s*([^;]*);?.*/, '$1');
         value = parseFloat(value);
@@ -377,7 +378,7 @@
   };
 
   // Called when a registered user already in a room, tries to enter in another room
-  var alreadyInARoom = function() {
+  var alreadyInARoom = function () {
     var html = [
       '<div class="modal-header">',
       '<h3>Already in a room</h3>',
@@ -396,7 +397,7 @@
   };
 
   // Start cassette animation
-  var cassetteAnimation = function(endtime, forward) {
+  var cassetteAnimation = function (endtime, forward) {
     var deg;
     var factor;
     var millisleft;
@@ -406,7 +407,7 @@
     var step;
     var width;
 
-    (step = function() {
+    (step = function () {
       millisleft = endtime - Date.now();
       secleft = millisleft / 1000;
 
@@ -443,7 +444,7 @@
   };
 
   // Prompt for name and send it
-  var chooseNickname = function(msg) {
+  var chooseNickname = function (msg) {
     msg = msg
       ? '<span class="label label-important">' +
         msg +
@@ -481,7 +482,7 @@
     var $button = $('#join');
     var $login = $('#login');
 
-    $button.on('click', function() {
+    $button.on('click', function () {
       var value = $login.val();
       $login.val('');
 
@@ -492,28 +493,28 @@
       chooseNickname("Nickname can't be empty.");
     });
 
-    $login.on('keyup', function(event) {
+    $login.on('keyup', function (event) {
       if (event.keyCode === 13) {
         $button.click();
       }
     });
 
-    $modal.modal('show').on('shown', function() {
+    $modal.modal('show').on('shown', function () {
       $login.focus();
     });
   };
 
-  var clearPrivate = function() {
+  var clearPrivate = function () {
     var width = $recipient.outerWidth(true) + 1;
     $recipient.css('margin-right', '0');
     $recipient.text('');
     $messagebox.animate({ width: '+=' + width + 'px' }, 'fast');
 
-    var $el = $('.name').filter(function() {
+    var $el = $('.name').filter(function () {
       return $(this).text() === pvtmsgto;
     });
     $el.prevAll('.private').hide();
-    $el.off('click').on('click', function() {
+    $el.off('click').on('click', function () {
       addPrivate($(this).text());
     });
 
@@ -522,7 +523,7 @@
   };
 
   // Game over countdown
-  var countDown = function(endtime) {
+  var countDown = function (endtime) {
     var millisleft = endtime - Date.now();
     var secleft = millisleft / 1000;
 
@@ -532,13 +533,13 @@
       return;
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
       countDown(endtime);
     }, 200);
   };
 
   // Let the user know when he/she has disconnected
-  var disconnect = function() {
+  var disconnect = function () {
     clearInterval(timer);
     audio.pause();
     addChatEntry($('<span class="error">ERROR: You have disconnected.</span>'));
@@ -546,14 +547,14 @@
     $users.empty();
   };
 
-  var encodeEntities = function(str) {
+  var encodeEntities = function (str) {
     return str
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
   };
 
-  var gameOver = function(podium) {
+  var gameOver = function (podium) {
     var html = [
       '<div class="modal-header">',
       '<h3>Game Over</h3>',
@@ -575,7 +576,7 @@
       '<tbody>'
     ];
 
-    podium.forEach(function(player, i) {
+    podium.forEach(function (player, i) {
       html.push('<tr>');
       html.push(
         '<td><div class="icons medals rank' + (i + 1) + '"></div></td>'
@@ -607,7 +608,7 @@
   };
 
   // Receive a chat message
-  var getChatMessage = function(chatmsg, from, to) {
+  var getChatMessage = function (chatmsg, from, to) {
     if (ignoredplayers[from]) {
       return;
     }
@@ -631,7 +632,7 @@
     addChatEntry($message);
   };
 
-  var hideChat = function() {
+  var hideChat = function () {
     $chatwrapper.toggle(300);
     $togglechat.text('Show chat');
     $togglechat.off('click').on('click', showChat);
@@ -639,13 +640,13 @@
   };
 
   // Put a player in the ignore list
-  var ignorePlayer = function(args, $outcome) {
+  var ignorePlayer = function (args, $outcome) {
     if (ignoredplayers[args[0]]) {
       $outcome.text('(From binb): ' + args[0] + ' is already ignored.');
       return addChatEntry($outcome);
     }
 
-    primus.send('ignore', args[0], function(ignored, player) {
+    primus.send('ignore', args[0], function (ignored, player) {
       if (ignored) {
         ignoredplayers[player] = true;
         $outcome.text('(From binb): ' + player + ' is now ignored.');
@@ -657,7 +658,7 @@
     });
   };
 
-  var loadTrack = function(previewUrl) {
+  var loadTrack = function (previewUrl) {
     audio.src = previewUrl;
   };
 
@@ -667,7 +668,7 @@
    * build an array of copies of the string for each field.
    */
 
-  var parseCommand = function(input) {
+  var parseCommand = function (input) {
     var inquotes = false;
     var token = '';
     var tokens = [];
@@ -723,7 +724,7 @@
   };
 
   // Play a track
-  var playTrack = function(data) {
+  var playTrack = function (data) {
     if ($touchplay) {
       $touchplay.html('<i class="icon-play icon-white"></i> Play');
       $touchplay.removeClass('btn-danger disabled').addClass('btn-success');
@@ -746,8 +747,8 @@
   };
 
   // Return a function that will kick or ban a player
-  var punishPlayer = function(punishment) {
-    return function(tokens, $outcome) {
+  var punishPlayer = function (punishment) {
+    return function (tokens, $outcome) {
       $outcome.append('you are not allowed to ' + punishment + ' a player.');
       if (!subscriber) {
         return addChatEntry($outcome);
@@ -769,7 +770,7 @@
         args.push(tokens[1], tokens[2]);
       }
 
-      args.push(function(success) {
+      args.push(function (success) {
         if (!success) {
           addChatEntry($outcome);
         }
@@ -780,10 +781,10 @@
   };
 
   // Return a function that will add a random text from the given set, with the given style
-  var randomFeedback = function(set, style) {
+  var randomFeedback = function (set, style) {
     var card = set.length;
 
-    return function() {
+    return function () {
       var index = Math.floor(Math.random() * card);
       var text = set[index];
 
@@ -792,7 +793,7 @@
   };
 
   // Successfully joined the room
-  var ready = function(data) {
+  var ready = function (data) {
     nickname = data.nickname;
 
     if (!data.loggedin) {
@@ -810,7 +811,7 @@
     addChatEntry($entry);
     updateUsers(data.usersData);
 
-    $messagebox.on('keydown', function(event) {
+    $messagebox.on('keydown', function (event) {
       if (event.keyCode === 13) {
         var value = $messagebox.val().trim();
         $messagebox.val('');
@@ -830,7 +831,7 @@
     });
 
     $guessbox
-      .on('keydown', function(event) {
+      .on('keydown', function (event) {
         switch (event.keyCode) {
           case 13: // return
             var guess = $guessbox.val().trim();
@@ -867,7 +868,7 @@
             $guessbox.val('');
         }
       })
-      .on('paste', function(event) {
+      .on('paste', function (event) {
         event.preventDefault();
       })
       .focus();
@@ -880,7 +881,7 @@
     primus.on('newuser', userJoin);
     primus.on('nomatch', randomFeedback(nmstrings, 'wrong'));
     primus.on('playtrack', playTrack);
-    primus.on('stoptrying', function() {
+    primus.on('stoptrying', function () {
       addFeedback('You guessed both artist and title. Please wait...');
     });
     primus.on('titlematched', randomFeedback(tmstrings, 'correct'));
@@ -892,17 +893,15 @@
   };
 
   // Show the number of players inside each room
-  var roomsOverview = function(data) {
-    $('.users-counter').each(function() {
-      var room = $(this)
-        .prevAll('.room-name')
-        .text();
+  var roomsOverview = function (data) {
+    $('.users-counter').each(function () {
+      var room = $(this).prevAll('.room-name').text();
       userscounters[room] = $(this);
       $(this).text(data[room]);
     });
   };
 
-  var setStatus = function(data) {
+  var setStatus = function (data) {
     if (data.status === 0) {
       isplaying = true;
       cassetteAnimation(Date.now() + data.timeleft, true);
@@ -913,16 +912,16 @@
     addFeedback(states[data.status]);
   };
 
-  var showChat = function() {
+  var showChat = function () {
     $chatwrapper.toggle(300);
     $togglechat.text('Hide chat');
     $togglechat.off('click').on('click', hideChat);
-    $tracks.animate({ maxHeight: '240px' }, 300, function() {
+    $tracks.animate({ maxHeight: '240px' }, 300, function () {
       $chat[0].scrollTop = $chat[0].scrollHeight;
     });
   };
 
-  var slashCommandHandler = function(line) {
+  var slashCommandHandler = function (line) {
     var $outcome = $('<span class="message private">(From binb): </span>');
     var args;
 
@@ -955,7 +954,7 @@
   };
 
   // Send a private message to a user
-  var privateMessage = function(args, $outcome) {
+  var privateMessage = function (args, $outcome) {
     if (!~users.indexOf(args[0])) {
       $outcome.text("(From binb): There's no one here by that name.");
       return addChatEntry($outcome);
@@ -964,7 +963,7 @@
   };
 
   // Reply to the last player who sent you a private message
-  var replyToPrivate = function(args, $outcome) {
+  var replyToPrivate = function (args, $outcome) {
     if (!replyto) {
       $outcome.text("(From binb): There's no one to reply to.");
       return addChatEntry($outcome);
@@ -977,13 +976,13 @@
   };
 
   // Unban a player
-  var unbanPlayer = function(args, $outcome) {
+  var unbanPlayer = function (args, $outcome) {
     $outcome.append('you are not allowed to unban a player.');
     if (!subscriber) {
       return addChatEntry($outcome);
     }
 
-    primus.send('unban', args[0], function(success) {
+    primus.send('unban', args[0], function (success) {
       if (!success) {
         addChatEntry($outcome);
       }
@@ -991,7 +990,7 @@
   };
 
   // Remove a player from the ignore list
-  var unignorePlayer = function(args, $outcome) {
+  var unignorePlayer = function (args, $outcome) {
     if (!ignoredplayers[args[0]]) {
       $outcome.text('(From binb): you have not ignored ' + args[0] + '.');
       return addChatEntry($outcome);
@@ -1004,17 +1003,17 @@
   };
 
   // Update the list of players
-  var updateUsers = function(usersData) {
+  var updateUsers = function (usersData) {
     $users.empty();
 
-    users = Object.keys(usersData).sort(function(a, b) {
+    users = Object.keys(usersData).sort(function (a, b) {
       return usersData[b].points - usersData[a].points;
     });
 
     // Flag to test if our private recipient is in the list of active users
     var found = false;
 
-    users.forEach(function(user, index) {
+    users.forEach(function (user, index) {
       user = usersData[user];
 
       var $guesstime = $('<span class="guess-time"></span>');
@@ -1041,7 +1040,7 @@
         $username.on('click', clearPrivate);
         found = true;
       } else {
-        $username.on('click', function() {
+        $username.on('click', function () {
           addPrivate($(this).text());
         });
       }
@@ -1083,14 +1082,14 @@
     }
   };
 
-  var updateRoomsOverview = function(room, players) {
+  var updateRoomsOverview = function (room, players) {
     if (room !== roomname) {
       userscounters[room].text(players);
     }
   };
 
   // Convert any URLs in text into clickable links
-  var urlize = function(text) {
+  var urlize = function (text) {
     if (urlregex.test(text)) {
       var html = '';
       var splits = text.split(urlregex);
@@ -1118,7 +1117,7 @@
   };
 
   // A new player has joined the game
-  var userJoin = function(username, usersData) {
+  var userJoin = function (username, usersData) {
     var $entry = $(
       '<span class="join">' + username + ' joined the game</span>'
     );
@@ -1127,7 +1126,7 @@
   };
 
   // A player has left the game
-  var userLeft = function(username, usersData) {
+  var userLeft = function (username, usersData) {
     var $entry = $('<span class="left">' + username + ' left the game</span>');
     addChatEntry($entry);
     updateUsers(usersData);
@@ -1141,7 +1140,7 @@
       usage: 'usage: /ban &lt;player&gt; [&lt;message&gt;] [&lt;duration&gt;]'
     },
     clear: {
-      fn: function() {
+      fn: function () {
         $chat.empty();
       },
       minargs: 0

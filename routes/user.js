@@ -21,28 +21,31 @@ for (let i = 0; i < rooms.length; i++) {
  * Show two lists of users, one ordered by points and one by best guess time (limit set to 30).
  */
 
-exports.leaderboards = function(req, res, next) {
-  usersClient.zrevrange(['users', 0, 29, 'withscores'], function(err, pointsresults) {
-    if (err) {
-      return next(err);
+exports.leaderboards = function (req, res, next) {
+  usersClient.zrevrange(
+    ['users', 0, 29, 'withscores'],
+    function (err, pointsresults) {
+      if (err) {
+        return next(err);
+      }
+      // usersClient.sort(utils.sortParams(0), function(err, timesresults) {
+      //   if (err) {
+      //     return next(err);
+      //   }
+      //   const leaderboards = utils.buildLeaderboards(pointsresults, timesresults);
+      //   res.locals.slogan = utils.randomSlogan();
+      //   res.render('leaderboards', leaderboards);
+      // });
+      res.render('leaderboards', utils.buildLeaderboards([], []));
     }
-    // usersClient.sort(utils.sortParams(0), function(err, timesresults) {
-    //   if (err) {
-    //     return next(err);
-    //   }
-    //   const leaderboards = utils.buildLeaderboards(pointsresults, timesresults);
-    //   res.locals.slogan = utils.randomSlogan();
-    //   res.render('leaderboards', leaderboards);
-    // });
-    res.render('leaderboards', utils.buildLeaderboards([], []));
-  });
+  );
 };
 
 /**
  * Get 30 users from the ranking, starting at index `begin`.
  */
 
-exports.sliceLeaderboard = function(req, res, next) {
+exports.sliceLeaderboard = function (req, res, next) {
   const begin = parseInt(req.query.begin, 10);
   const by = req.query.by;
   if (isNaN(begin) || begin > 180 || (by !== 'points' && by !== 'times')) {
@@ -50,12 +53,15 @@ exports.sliceLeaderboard = function(req, res, next) {
   }
   const end = begin + 29;
   if (by === 'points') {
-    usersClient.zrevrange(['users', begin, end, 'withscores'], function(err, results) {
-      if (err) {
-        return next(err);
+    usersClient.zrevrange(
+      ['users', begin, end, 'withscores'],
+      function (err, results) {
+        if (err) {
+          return next(err);
+        }
+        res.send(results);
       }
-      res.send(results);
-    });
+    );
     return;
   }
   // usersClient.sort(utils.sortParams(begin), function(err, results) {
@@ -71,7 +77,7 @@ exports.sliceLeaderboard = function(req, res, next) {
  * Change password middlewares.
  */
 
-exports.validateChangePasswd = function(req, res, next) {
+exports.validateChangePasswd = function (req, res, next) {
   if (
     !req.session.user ||
     req.body.oldpassword === undefined ||
@@ -101,9 +107,9 @@ exports.validateChangePasswd = function(req, res, next) {
   next();
 };
 
-exports.checkOldPasswd = function(req, res, next) {
+exports.checkOldPasswd = function (req, res, next) {
   const key = 'user:' + req.session.user;
-  usersClient.hmget([key, 'salt', 'password'], function(err, data) {
+  usersClient.hmget([key, 'salt', 'password'], function (err, data) {
     if (err) {
       return next(err);
     }
@@ -121,7 +127,7 @@ exports.checkOldPasswd = function(req, res, next) {
   });
 };
 
-exports.changePasswd = function(req, res, next) {
+exports.changePasswd = function (req, res, next) {
   const followup = ~safeurls.indexOf(req.query.followup)
     ? req.query.followup
     : '/';
@@ -133,12 +139,12 @@ exports.changePasswd = function(req, res, next) {
     .update(salt + req.body.newpassword)
     .digest('hex');
 
-  usersClient.hmset([key, 'salt', salt, 'password', digest], function(err) {
+  usersClient.hmset([key, 'salt', salt, 'password', digest], function (err) {
     if (err) {
       return next(err);
     }
     // Regenerate the session
-    req.session.regenerate(function() {
+    req.session.regenerate(function () {
       req.session.cookie.maxAge = 604800000; // One week
       req.session.user = user;
       res.redirect(followup);
@@ -150,7 +156,7 @@ exports.changePasswd = function(req, res, next) {
  * Login middlewares.
  */
 
-exports.validateLogin = function(req, res, next) {
+exports.validateLogin = function (req, res, next) {
   if (req.body.username === undefined || req.body.password === undefined) {
     return res.status(400).send(http.STATUS_CODES[400]);
   }
@@ -172,9 +178,9 @@ exports.validateLogin = function(req, res, next) {
   next();
 };
 
-exports.checkUser = function(req, res, next) {
+exports.checkUser = function (req, res, next) {
   const key = 'user:' + req.body.username;
-  usersClient.exists([key], function(err, exists) {
+  usersClient.exists([key], function (err, exists) {
     if (err) {
       return next(err);
     }
@@ -189,9 +195,9 @@ exports.checkUser = function(req, res, next) {
   });
 };
 
-exports.authenticate = function(req, res, next) {
+exports.authenticate = function (req, res, next) {
   const key = 'user:' + req.body.username;
-  usersClient.hmget([key, 'salt', 'password'], function(err, data) {
+  usersClient.hmget([key, 'salt', 'password'], function (err, data) {
     if (err) {
       return next(err);
     }
@@ -206,7 +212,7 @@ exports.authenticate = function(req, res, next) {
         ? req.query.followup
         : '/';
       // Authentication succeeded, regenerate the session
-      req.session.regenerate(function() {
+      req.session.regenerate(function () {
         req.session.cookie.maxAge = 604800000; // One week
         req.session.user = req.body.username;
         res.redirect(followup);
@@ -224,9 +230,9 @@ exports.authenticate = function(req, res, next) {
  * Logout the user.
  */
 
-exports.logout = function(req, res) {
+exports.logout = function (req, res) {
   // Destroy the session
-  req.session.destroy(function() {
+  req.session.destroy(function () {
     res.redirect('/');
   });
 };
@@ -235,7 +241,7 @@ exports.logout = function(req, res) {
  * Sign up middlewares.
  */
 
-exports.validateSignUp = function(req, res, next) {
+exports.validateSignUp = function (req, res, next) {
   if (
     req.body.username === undefined ||
     req.body.email === undefined ||
@@ -278,9 +284,9 @@ exports.validateSignUp = function(req, res, next) {
   next();
 };
 
-exports.userExists = function(req, res, next) {
+exports.userExists = function (req, res, next) {
   const key = 'user:' + req.body.username;
-  usersClient.exists([key], function(err, exists) {
+  usersClient.exists([key], function (err, exists) {
     if (err) {
       return next(err);
     }
@@ -293,9 +299,9 @@ exports.userExists = function(req, res, next) {
   });
 };
 
-exports.emailExists = function(req, res, next) {
+exports.emailExists = function (req, res, next) {
   const key = 'email:' + req.body.email;
-  usersClient.exists([key], function(err, exists) {
+  usersClient.exists([key], function (err, exists) {
     if (err) {
       return next(err);
     }
@@ -308,7 +314,7 @@ exports.emailExists = function(req, res, next) {
   });
 };
 
-exports.createAccount = function(req, res, next) {
+exports.createAccount = function (req, res, next) {
   const mailkey = 'email:' + req.body.email;
   const salt = crypto.randomBytes(6).toString('base64');
   const userkey = 'user:' + req.body.username;
@@ -328,7 +334,7 @@ exports.createAccount = function(req, res, next) {
   multi.set(mailkey, userkey);
   multi.zadd('users', 0, req.body.username);
   multi.sadd('emails', req.body.email);
-  multi.exec(function(err) {
+  multi.exec(function (err) {
     if (err) {
       return next(err);
     }
@@ -345,7 +351,7 @@ exports.createAccount = function(req, res, next) {
  * Recover password middlewares.
  */
 
-exports.validateRecoverPasswd = function(req, res, next) {
+exports.validateRecoverPasswd = function (req, res, next) {
   if (req.body.email === undefined || req.body.captcha === undefined) {
     return res.status(400).send(http.STATUS_CODES[400]);
   }
@@ -369,9 +375,9 @@ exports.validateRecoverPasswd = function(req, res, next) {
   next();
 };
 
-exports.sendEmail = function(req, res, next) {
+exports.sendEmail = function (req, res, next) {
   const key = 'email:' + req.body.email;
-  usersClient.get([key], function(err, data) {
+  usersClient.get([key], function (err, data) {
     if (err) {
       return next(err);
     }
@@ -381,11 +387,11 @@ exports.sendEmail = function(req, res, next) {
       // Email exists, generate a secure random token
       const token = crypto.randomBytes(48).toString('hex');
       // Token expires after 4 hours
-      usersClient.setex(['token:' + token, 14400, data], function(err) {
+      usersClient.setex(['token:' + token, 14400, data], function (err) {
         if (err) {
           return next(err);
         }
-        mailer.sendEmail(req.body.email, token, function(err) {
+        mailer.sendEmail(req.body.email, token, function (err) {
           if (err) {
             console.error(err.message);
           }
@@ -409,7 +415,7 @@ exports.sendEmail = function(req, res, next) {
  * Reset user password.
  */
 
-exports.resetPasswd = function(req, res, next) {
+exports.resetPasswd = function (req, res, next) {
   if (req.body.password === undefined) {
     return res.status(400).send(http.STATUS_CODES[400]);
   }
@@ -433,7 +439,7 @@ exports.resetPasswd = function(req, res, next) {
   }
 
   const key = 'token:' + req.query.token;
-  usersClient.get([key], function(err, user) {
+  usersClient.get([key], function (err, user) {
     if (err) {
       return next(err);
     }
@@ -445,16 +451,19 @@ exports.resetPasswd = function(req, res, next) {
         .update(salt + req.body.password)
         .digest('hex');
 
-      usersClient.hmset([user, 'salt', salt, 'password', digest], function(err) {
-        if (err) {
-          return next(err);
+      usersClient.hmset(
+        [user, 'salt', salt, 'password', digest],
+        function (err) {
+          if (err) {
+            return next(err);
+          }
+          res.render('login', {
+            followup: '/',
+            slogan: utils.randomSlogan(),
+            success: 'You can now login with your new password.'
+          });
         }
-        res.render('login', {
-          followup: '/',
-          slogan: utils.randomSlogan(),
-          success: 'You can now login with your new password.'
-        });
-      });
+      );
       return;
     }
     req.session.errors = { alert: 'Invalid or expired token.' };
@@ -466,14 +475,14 @@ exports.resetPasswd = function(req, res, next) {
  * Show user profile.
  */
 
-exports.profile = function(req, res, next) {
+exports.profile = function (req, res, next) {
   const key = 'user:' + req.params.username;
-  usersClient.exists([key], function(err, exists) {
+  usersClient.exists([key], function (err, exists) {
     if (err) {
       return next(err);
     }
     if (exists) {
-      usersClient.hgetall([key], function(err, user) {
+      usersClient.hgetall([key], function (err, user) {
         if (err) {
           return next(err);
         }

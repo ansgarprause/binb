@@ -16,7 +16,7 @@ const options = {
   // Look up multiple artists by their IDs and get `limit` songs for each one
   path:
     '/lookup?id=' +
-    Object.values(artistIds).flat().join(",") +
+    Object.values(artistIds).flat().join(',') +
     '&entity=song&limit=' +
     limit,
   port: 80
@@ -26,7 +26,7 @@ const options = {
  * Set the rooms in which the songs of a given artist will be loaded.
  */
 
-parser.on('data', function(track) {
+parser.on('data', function (track) {
   if (track.wrapperType === 'artist') {
     return;
   }
@@ -57,17 +57,17 @@ parser.on('data', function(track) {
   songId++;
 });
 
-parser.on('end', function() {
+parser.on('end', function () {
   songsClient.quit();
   process.stdout.write('OK\n');
 });
 
-songsClient.del(rooms, function(err) {
+songsClient.del(rooms, function (err) {
   if (err) {
     throw err;
   }
   process.stdout.write('Loading sample tracks... ');
-  http.get(options, function(res) {
+  http.get(options, function (res) {
     res.pipe(parser);
   });
 });

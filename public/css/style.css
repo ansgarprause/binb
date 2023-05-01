@@ -1,21 +1,27 @@
 @font-face {
   font-family: 'ChristopherhandRegular';
   src: url('/static/fonts/comesinhandy-webfont.eot');
-  src: url('/static/fonts/comesinhandy-webfont.eot?#iefix') format('embedded-opentype'),
-     url('/static/fonts/comesinhandy-webfont.woff') format('woff'),
-     url('/static/fonts/comesinhandy-webfont.ttf') format('truetype');
+  src: url('/static/fonts/comesinhandy-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('/static/fonts/comesinhandy-webfont.woff') format('woff'),
+    url('/static/fonts/comesinhandy-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 body {
-  background: url('/static/img/bg.jpg') repeat-x scroll 0 0 #F5F6F7;
+  background: url('/static/img/bg.jpg') repeat-x scroll 0 0 #f5f6f7;
   font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
   padding-top: 45px;
 }
 section {
   margin-top: 30px;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
 h1 {
@@ -30,7 +36,9 @@ h3 {
   font-size: 18px;
   line-height: 27px;
 }
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   line-height: 18px;
 }
 h4 {
@@ -77,7 +85,7 @@ h6 {
   line-height: 68px;
   background-position: 0 -120px;
   font-size: 34px;
-  color: #0088CC;
+  color: #0088cc;
 }
 .form-horizontal .control-group {
   margin-bottom: 10px;
@@ -92,12 +100,15 @@ form .clearfix {
   margin-bottom: 10px;
 }
 .well {
-  background-color: #DDDDDD;
+  background-color: #dddddd;
 }
 .alert {
   margin-bottom: 9px;
 }
-.ban, .leaderboard-wrapper, .well, #summary {
+.ban,
+.leaderboard-wrapper,
+.well,
+#summary {
   margin-bottom: 18px;
 }
 .submit-button {
@@ -123,7 +134,9 @@ form .clearfix {
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-#login, #guess, #message {
+#login,
+#guess,
+#message {
   margin-bottom: 0;
 }
 #login {
@@ -132,10 +145,12 @@ form .clearfix {
 #join {
   margin-right: 45px;
 }
-.modal, .modal.fade.in {
+.modal,
+.modal.fade.in {
   top: 20%;
 }
-.modal-footer .divider, .modal-footer .divider span {
+.modal-footer .divider,
+.modal-footer .divider span {
   position: absolute;
 }
 .modal-footer .divider {
@@ -146,11 +161,13 @@ form .clearfix {
 }
 .modal-footer .divider span {
   color: #aaa;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   top: 10px;
   left: -6px;
 }
-.users-counter, #total-tracks, #tracks a {
+.users-counter,
+#total-tracks,
+#tracks a {
   float: right;
 }
 .thumbnails {
@@ -172,12 +189,15 @@ form .clearfix {
   width: 70px;
   height: 70px;
 }
-.highscores, .profile {
+.highscores,
+.profile {
   font-weight: bold;
   font-size: 22px;
   line-height: 32px;
 }
-.highscores .img, .profile .img, .medals {
+.highscores .img,
+.profile .img,
+.medals {
   width: 32px;
   height: 32px;
 }
@@ -189,7 +209,8 @@ form .clearfix {
   margin-right: 7px;
   background-position: -64px 0;
 }
-.leaderboard-wrapper, .stats {
+.leaderboard-wrapper,
+.stats {
   border: 1px solid #ccc;
   border-left: 0;
   margin-top: 8px;
@@ -205,22 +226,25 @@ form .clearfix {
   margin: 0;
   border: 0;
 }
-.leaderboard td, .stats td {
+.leaderboard td,
+.stats td {
   border-left: 1px solid #ccc;
   border-top: 1px solid #ccc;
   vertical-align: middle;
 }
-.leaderboard td [class^="icon-"] {
+.leaderboard td [class^='icon-'] {
   vertical-align: top;
   margin-top: 2px;
 }
 .leaderboard tr:first-child td {
   border-top: 0;
 }
-.leaderboard tbody tr:nth-child(odd) td, .stats tbody tr:nth-child(odd) td {
+.leaderboard tbody tr:nth-child(odd) td,
+.stats tbody tr:nth-child(odd) td {
   background-color: #ddd;
 }
-.leaderboard tbody tr:hover td, .stats tbody tr:hover td {
+.leaderboard tbody tr:hover td,
+.stats tbody tr:hover td {
   background-color: #dadada;
 }
 .loading {
@@ -231,7 +255,7 @@ form .clearfix {
   display: none;
 }
 .loading-block {
-  background-color: #6184B7;
+  background-color: #6184b7;
   border: 1px solid #466085;
   float: left;
   height: 12px;
@@ -310,7 +334,7 @@ form .clearfix {
     opacity: 1;
   }
   100% {
-    transform:s cale(0.7);
+    transform: s cale(0.7);
     opacity: 0.1;
   }
 }
@@ -319,7 +343,7 @@ form .clearfix {
   line-height: 25px;
   position: absolute;
   top: 61px;
-  background-color: rgba(51,51,51, 0.7);
+  background-color: rgba(51, 51, 51, 0.7);
   color: white;
   font-weight: bold;
   font-size: 14px;
@@ -341,7 +365,8 @@ form .clearfix {
 .matchedtitle {
   color: #f3a22f;
 }
-.cups, .medals {
+.cups,
+.medals {
   margin-left: auto;
   margin-right: auto;
 }
@@ -358,7 +383,8 @@ form .clearfix {
 .rank3 {
   background-position: -32px -80px;
 }
-.scoreboard th, .scoreboard td {
+.scoreboard th,
+.scoreboard td {
   vertical-align: middle;
   text-align: center;
 }
@@ -372,7 +398,7 @@ form .clearfix {
   display: inline-block;
 }
 #total-tracks {
-  color: #BFBFBF;
+  color: #bfbfbf;
   margin-top: 34px;
 }
 #cassette {
@@ -387,7 +413,8 @@ form .clearfix {
   top: 80px;
   left: 175px;
 }
-#wheel-left, #wheel-right {
+#wheel-left,
+#wheel-right {
   position: absolute;
   width: 24px;
   height: 24px;
@@ -400,7 +427,8 @@ form .clearfix {
 #wheel-right {
   left: 145px;
 }
-#tape-left, #tape-right {
+#tape-left,
+#tape-right {
   height: 70px;
   width: 70px;
   position: absolute;
@@ -417,13 +445,14 @@ form .clearfix {
 #tape-right {
   left: 130px;
 }
-#progress-bar, #progress {
+#progress-bar,
+#progress {
   height: 7px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 2px 0 #333;
-   -moz-box-shadow: inset 0 1px 2px 0 #333;
+  -moz-box-shadow: inset 0 1px 2px 0 #333;
   box-shadow: inset 0 1px 2px 0 #333;
 }
 #progress-bar {
@@ -443,7 +472,7 @@ form .clearfix {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  background: rgba(50,50,50,0.8);
+  background: rgba(50, 50, 50, 0.8);
 }
 #touch-play {
   position: absolute;
@@ -453,7 +482,11 @@ form .clearfix {
 #volume {
   height: 159px;
 }
-#volume-button, #volume-slider, #volume-total, #volume-current, #volume-handle {
+#volume-button,
+#volume-slider,
+#volume-total,
+#volume-current,
+#volume-handle {
   position: absolute;
 }
 #volume-button {
@@ -466,18 +499,24 @@ form .clearfix {
   height: 18px;
   width: 18px;
   border: 1px solid;
-  border-color: #CCCCCC #CCCCCC #AAAAAA;
+  border-color: #cccccc #cccccc #aaaaaa;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   cursor: pointer;
-  filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#ffffffff,EndColorStr=#ffe0e0e0);
-  background-image: -moz-linear-gradient(top,#fff 0,#e0e0e0 100%);
-  background-image: -ms-linear-gradient(top,#fff 0,#e0e0e0 100%);
-  background-image: -o-linear-gradient(top,#fff 0,#e0e0e0 100%);
-  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fff),color-stop(100%,#e0e0e0));
-  background-image: -webkit-linear-gradient(top,#fff 0,#e0e0e0 100%);
-  background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#ffffffff,EndColorStr=#ffe0e0e0);
+  background-image: -moz-linear-gradient(top, #fff 0, #e0e0e0 100%);
+  background-image: -ms-linear-gradient(top, #fff 0, #e0e0e0 100%);
+  background-image: -o-linear-gradient(top, #fff 0, #e0e0e0 100%);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #fff),
+    color-stop(100%, #e0e0e0)
+  );
+  background-image: -webkit-linear-gradient(top, #fff 0, #e0e0e0 100%);
+  background-image: linear-gradient(to bottom, #fff 0, #e0e0e0 100%);
 }
 #volume-button .button:hover {
   border-color: #999999;
@@ -486,17 +525,23 @@ form .clearfix {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
 }
 #volume-button .button:active {
-  border-color: #999999 #AAAAAA #CCCCCC;
+  border-color: #999999 #aaaaaa #cccccc;
   -webkit-box-shadow: 0 1px 2px 0 #aaa inset;
   -moz-box-shadow: 0 1px 2px 0 #aaa inset;
   box-shadow: 0 1px 2px 0 #aaa inset;
-  filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#e6e6e6,EndColorStr=#dcdcdc);
-  background-image: -moz-linear-gradient(top,#e6e6e6 0,#dcdcdc 100%);
-  background-image: -ms-linear-gradient(top,#e6e6e6 0,#dcdcdc 100%);
-  background-image: -o-linear-gradient(top,#e6e6e6 0,#dcdcdc 100%);
-  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#e6e6e6),color-stop(100%,#dcdcdc));
-  background-image: -webkit-linear-gradient(top,#e6e6e6 0,#dcdcdc 100%);
-  background-image: linear-gradient(to bottom,#e6e6e6 0,#dcdcdc 100%);
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#e6e6e6,EndColorStr=#dcdcdc);
+  background-image: -moz-linear-gradient(top, #e6e6e6 0, #dcdcdc 100%);
+  background-image: -ms-linear-gradient(top, #e6e6e6 0, #dcdcdc 100%);
+  background-image: -o-linear-gradient(top, #e6e6e6 0, #dcdcdc 100%);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #e6e6e6),
+    color-stop(100%, #dcdcdc)
+  );
+  background-image: -webkit-linear-gradient(top, #e6e6e6 0, #dcdcdc 100%);
+  background-image: linear-gradient(to bottom, #e6e6e6 0, #dcdcdc 100%);
 }
 #volume-button .button #icon {
   margin: 1px;
@@ -526,13 +571,16 @@ form .clearfix {
   background: rgba(50, 50, 50, 0.1);
   z-index: 1;
 }
-#volume-total, #volume-current {
+#volume-total,
+#volume-current {
   left: 8px;
   top: 8px;
   width: 4px;
   height: 100px;
 }
-#volume-total, #volume-current, #volume-handle {
+#volume-total,
+#volume-current,
+#volume-handle {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
@@ -570,13 +618,16 @@ form .clearfix {
   max-height: 398px;
   overflow: auto;
 }
-#users .name, #tracks .artist {
+#users .name,
+#tracks .artist {
   font-weight: bold;
 }
 #message-wrapper {
   text-align: right;
 }
-#users li, #tracks li, #chat li {
+#users li,
+#tracks li,
+#chat li {
   color: #404040;
 }
 #users li {
@@ -590,7 +641,8 @@ form .clearfix {
   position: absolute;
   left: -19px;
 }
-.registered, .round-rank {
+.registered,
+.round-rank {
   height: 16px;
   width: 16px;
   margin: 1px 2px 0 0;
@@ -604,13 +656,15 @@ form .clearfix {
 #users .name {
   margin-right: 4px;
 }
-#users .name, .registered {
+#users .name,
+.registered {
   cursor: pointer;
 }
 #users .you {
   cursor: auto;
 }
-#users .points, #users .round-points {
+#users .points,
+#users .round-points {
   margin-right: 10px;
 }
 .stand1 {
@@ -630,11 +684,11 @@ form .clearfix {
   position: absolute;
   top: -17px;
   left: 805px;
-  color: #BFBFBF;
+  color: #bfbfbf;
   height: 16px;
   line-height: 16px;
   font-size: 11px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   -moz-border-radius: 4px 4px 0 0;
   -webkit-border-radius: 4px 4px 0 0;
   border-radius: 4px 4px 0 0;
@@ -643,25 +697,36 @@ form .clearfix {
   text-decoration: none;
 }
 #toggle-chat:hover {
-  border-color: #CCCCCC;
+  border-color: #cccccc;
   background-color: #f5f5f5;
   color: #333333;
   background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
   background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-gradient(
+    linear,
+    0 0,
+    0 100%,
+    from(#ffffff),
+    to(#e6e6e6)
+  );
   background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
   background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
   background-image: linear-gradient(top, #ffffff, #e6e6e6);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.05);
 }
 #toggle-chat:active {
   background-image: none;
-  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15),0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15),0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15),0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
   background-color: #e6e6e6;
   background-color: #d9d9d9 \9;
   outline: 0;
@@ -683,11 +748,12 @@ form .clearfix {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.075);
-  box-shadow: 0 1px 2px rgba(0,0,0,.075);
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
 }
-#chat .join, #chat .left {
+#chat .join,
+#chat .left {
   font-style: italic;
 }
 #chat .private {
@@ -696,14 +762,16 @@ form .clearfix {
 #feedback {
   text-align: center;
 }
-#feedback.correct, #users .correct{
-  color: #46A546;
+#feedback.correct,
+#users .correct {
+  color: #46a546;
 }
-#feedback.wrong, #chat .error {
-  color: #C43C35;
+#feedback.wrong,
+#chat .error {
+  color: #c43c35;
 }
 #guess.correct {
-  border-color: #46A546;
+  border-color: #46a546;
 }
 #guess.correct:focus {
   -webkit-box-shadow: 0 0 6px #7aba7b;
@@ -711,7 +779,7 @@ form .clearfix {
   box-shadow: 0 0 6px #7aba7b;
 }
 #guess.wrong {
-  border-color: #C43C35;
+  border-color: #c43c35;
 }
 #guess.wrong:focus {
   -webkit-box-shadow: 0 0 6px #d59392;
@@ -727,14 +795,33 @@ form .clearfix {
   margin: 0 2px 2px 0;
   padding: 8px;
   min-height: 40px;
-  background: -moz-linear-gradient(center top , #FBFBFB, #F5F5F5);
-  background: -webkit-gradient(linear, center top, center bottom, from(#FBFBFB), to(#F5F5F5));
-  background: -webkit-linear-gradient(center top , #FBFBFB, #F5F5F5);
-  background: -o-linear-gradient(center top , #FBFBFB, #F5F5F5);
-  background: -ms-linear-gradient(center top , #FBFBFB, #F5F5F5);
-  background: linear-gradient(center top , #FBFBFB, #F5F5F5);
+  background: -moz-linear-gradient(center top, #fbfbfb, #f5f5f5);
+  background: -webkit-gradient(
+    linear,
+    center top,
+    center bottom,
+    from(#fbfbfb),
+    to(#f5f5f5)
+  );
+  background: -webkit-linear-gradient(center top, #fbfbfb, #f5f5f5);
+  background: -o-linear-gradient(center top, #fbfbfb, #f5f5f5);
+  background: -ms-linear-gradient(center top, #fbfbfb, #f5f5f5);
+  background: linear-gradient(center top, #fbfbfb, #f5f5f5);
 }
-.registered, #users .name, #users .points, .round-rank, .round-points, #users .guess-time, #tracks img.artwork, #tracks .info, .highscores .img, .profile .img, #copy, #facebook-button, #twitter-button, #github-button {
+.registered,
+#users .name,
+#users .points,
+.round-rank,
+.round-points,
+#users .guess-time,
+#tracks img.artwork,
+#tracks .info,
+.highscores .img,
+.profile .img,
+#copy,
+#facebook-button,
+#twitter-button,
+#github-button {
   float: left;
 }
 #tracks img.artwork {
@@ -745,7 +832,8 @@ form .clearfix {
 #tracks .info {
   margin-right: 15px;
 }
-#tracks .artist, #tracks .title {
+#tracks .artist,
+#tracks .title {
   white-space: nowrap;
   max-width: 270px;
   overflow: hidden;
@@ -780,17 +868,19 @@ form .clearfix {
   position: absolute;
   left: 60px;
   bottom: 18px;
-  color: #BFBFBF;
+  color: #bfbfbf;
   width: 340px;
 }
 footer {
   padding: 0;
   margin-top: 17px;
-  border-top: 1px solid #DDDDDD;
-  color: #BFBFBF;
-  text-shadow: 0 1px 0 #FFFFFF;
+  border-top: 1px solid #dddddd;
+  color: #bfbfbf;
+  text-shadow: 0 1px 0 #ffffff;
 }
-#footer-inner, #twitter-button, #github-button {
+#footer-inner,
+#twitter-button,
+#github-button {
   height: 20px;
 }
 #footer-inner {
@@ -804,7 +894,7 @@ footer {
 }
 #facebook-button {
   width: 140px;
-  height: 21px
+  height: 21px;
 }
 #twitter-button {
   width: 80px;

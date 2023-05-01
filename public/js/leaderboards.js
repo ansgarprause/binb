@@ -1,7 +1,7 @@
-(function() {
+(function () {
   'use strict';
 
-  var appendResults = function(data, $leaderboard, offset, type) {
+  var appendResults = function (data, $leaderboard, offset, type) {
     for (var i = 0; i < data.length; i += 2) {
       var col1 = '<td>' + ++offset + '</td>';
       var col2 = '<td><a href="/user/' + data[i] + '">' + data[i] + '</a></td>';
@@ -16,22 +16,26 @@
     }
   };
 
-  $('.leaderboard-wrapper').each(function(index) {
+  $('.leaderboard-wrapper').each(function (index) {
     var $leaderboard = $(this).find('tbody');
     var $loading = $(this).find('.loading');
     var offset = 0;
     var type = index === 0 ? 'points' : 'times';
 
-    $(this).scroll(function() {
+    $(this).scroll(function () {
       var diff = $(this).prop('scrollHeight') - $(this).scrollTop();
 
       if (diff === $(this).height() && offset < 180) {
         offset += 30;
         $loading.show();
-        $.get('/sliceleaderboard', { begin: offset, by: type }, function(data) {
-          $loading.hide();
-          appendResults(data, $leaderboard, offset, type);
-        });
+        $.get(
+          '/sliceleaderboard',
+          { begin: offset, by: type },
+          function (data) {
+            $loading.hide();
+            appendResults(data, $leaderboard, offset, type);
+          }
+        );
       }
     });
   });

@@ -90,6 +90,6 @@ require('./lib/rooms')({
 });
 
 // Begin accepting connections
-server.listen(port, function() {
+server.listen(port, function () {
   console.info('binb server listening on port ' + port);
 });
