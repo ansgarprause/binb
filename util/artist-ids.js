@@ -23,5 +23,11 @@ module.exports = {
   ),
   kadavar: ['https://music.apple.com/us/artist/kadavar/534423387'].map(
     extractId
-  )
+  ),
+  mixed: [
+    'https://music.apple.com/us/artist/taylor-swift/159260351',
+    'https://music.apple.com/us/artist/gregory-isaacs/77547',
+    'https://music.apple.com/us/artist/radiohead/657515',
+    'https://music.apple.com/us/artist/britney-spears/217005'
+  ].map(extractId)
 };
