@@ -1,6 +1,6 @@
 {
   "gameswithnorepeats": 3,
   "port": 8138,
-  "rooms": ["britpop", "taylor", "kadavar", "mixed"],
+  "rooms": ["britpop", "taylor", "kadavar", "mixed", "gardenmix"],
   "songsinarun": 15
 }

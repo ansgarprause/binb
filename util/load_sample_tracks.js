@@ -4,7 +4,7 @@ const artistIds = require('./artist-ids');
 const http = require('http');
 const JSONStream = require('JSONStream');
 const { songsClientOptions } = require('../redis-config');
-const limit = 15; // The number of songs to retrieve for each artist
+const limit = 3; // The number of songs to retrieve for each artist
 const parser = JSONStream.parse(['results', true]);
 const songsClient = require('redis').createClient(songsClientOptions);
 let rooms = require('../config').rooms;
@@ -18,7 +18,8 @@ const options = {
     '/lookup?id=' +
     Object.values(artistIds).flat().join(',') +
     '&entity=song&limit=' +
-    limit,
+    limit + 
+    '&sort=popular',
   port: 80
 };
 
