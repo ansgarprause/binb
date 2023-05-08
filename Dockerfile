@@ -39,6 +39,8 @@ FROM base
 # Copy built application
 COPY --from=build /app /app
 
+RUN npm run minify
+
 # Start the server by default, this can be overwritten at runtime
 # CMD [ "npm", "run", "start" ]
-CMD npm run import-data; npm run minify; npm run start
+CMD npm run import-data; npm run start
