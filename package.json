@@ -10,6 +10,7 @@
   "scripts": {
     "minify": "for f in $(ls public/js/* | grep -v '\\.min\\.js$'); do uglifyjs $f -cm -o ${f%.js}.min.js; done",
     "import-data": "node util/load_sample_tracks.js",
+    "import-data-v2": "node util/load_with_complex_config.js",
     "start": "node app.js"
   },
   "engines": {
@@ -25,7 +26,7 @@
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "forwarded-for": "^1.0.1",
-    "hast-util-select": "^5.0.5",
+    "jsdom": "^22.0.0",
     "JSONStream": "^1.3.5",
     "primus": "^8.0.1",
     "primus-emitter": "^3.1.1",
