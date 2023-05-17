@@ -2,6 +2,7 @@
 
 const jsdom = require("jsdom");
 const { songsClientOptions } = require('../redis-config');
+let rooms = require('../config').rooms;
 const songsClient = require('redis').createClient(songsClientOptions);
 
 const { JSDOM } = jsdom;
@@ -72,7 +73,7 @@ const extractId = (url) => {
     return Number(url.split('/').at(-1));
 };
 
-async function getSongsByEntityUrl(artistUrls, limit=1, sort="popular") {
+async function getSongsByEntityUrl(artistUrls, limit = 1, sort = "popular") {
     const url = new URL("https://itunes.apple.com/lookup");
     url.searchParams.set("id", artistUrls.map(extractId));
     url.searchParams.set("entity", "song");
@@ -141,4 +142,10 @@ async function readRoom(roomName, roomConfig) {
     songs.forEach((song) => insertTrack(roomName, song));
 }
 
-readConfig(roomconfig);
+songsClient.del(rooms, function (err) {
+    if (err) {
+        throw err;
+    }
+    process.stdout.write('Loading sample tracks... ');
+    readConfig(roomconfig);
+});
