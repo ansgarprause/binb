@@ -8,6 +8,7 @@ const { RateLimiter } = limiter;
 
 const rooms = require('../config').rooms;
 const { songsClientOptions } = require('../redis-config');
+songsClientOptions.legacyMode = false;
 const songsClient = require('redis').createClient(songsClientOptions);
 
 const config = {
@@ -104,7 +105,7 @@ async function insertTrack(roomName, track, songId) {
         return;
     }
 
-    await songsClient.v4.hSet(
+    await songsClient.hSet(
         'song:' + songId,
         {
             'artistName': track.artistName,
@@ -117,7 +118,7 @@ async function insertTrack(roomName, track, songId) {
     );
     
     const score = songId;
-    await songsClient.v4.zAdd(roomName, [{score: score, value: songId.toString()}]);
+    await songsClient.zAdd(roomName, [{score: score, value: songId.toString()}]);
 }
 
 async function readConfig(config) {
@@ -168,7 +169,7 @@ async function readRoom(roomName, roomConfig) {
 async function run() {
     await songsClient.connect();
 
-    await songsClient.v4.del(rooms);
+    await songsClient.del(rooms);
 
     console.log('Loading sample tracks... ');
     await readConfig(config);
