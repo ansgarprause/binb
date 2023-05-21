@@ -82,13 +82,13 @@ async function getSongsByEntityUrlInBatches(artistUrls, limit, sort) {
     return (await Promise.all(promises)).flat();
 }
 
-async function insertTrack(roomName, track, songId) {
+async function insertTrack(roomName, track, score) {
     if (track.wrapperType === 'artist') {
         return;
     }
 
     await songsClient.hSet(
-        'song:' + songId,
+        'song:' + track.trackId,
         {
             'artistName': track.artistName,
             'trackName': track.trackName,
@@ -99,8 +99,7 @@ async function insertTrack(roomName, track, songId) {
         }
     );
     
-    const score = songId;
-    await songsClient.zAdd(roomName, [{score: score, value: songId.toString()}]);
+    await songsClient.zAdd(roomName, [{score: score, value: track.trackId.toString()}]);
 }
 
 async function readConfig(config) {
