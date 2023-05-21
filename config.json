@@ -3,7 +3,10 @@
   "port": 8138,
   "rooms": [
     "pop",
-    "kates-pop"
+    "kates-pop",
+    "britpop",
+    "taylor",
+    "gardenmix"
   ],
   "songs": {
     "pop": {
@@ -31,6 +34,53 @@
         "https://music.apple.com/de/playlist/10er-hits-essentials/pl.6b1b5dfda067443481265436811002f1",
         "https://music.apple.com/de/playlist/90er-pop-essentials/pl.0d70b7c9be8e4e0b95ebbf5578aaf7a2",
         "https://music.apple.com/de/playlist/00er-pop-essentials/pl.e50ccee7318043eaaf8e8e28a2a55114"
+      ],
+      "artists": [
+      ],
+      "songs": [
+      ]
+    },
+    "britpop": {
+      "songsPerArtistCount": 5,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+      ],
+      "artists": [
+        "https://music.apple.com/us/artist/blur/528564",
+        "https://music.apple.com/us/artist/oasis/512633",
+        "https://music.apple.com/us/artist/pulp/312518",
+        "https://music.apple.com/us/artist/radiohead/657515",
+        "https://music.apple.com/us/artist/supergrass/391069",
+        "https://music.apple.com/us/artist/the-verve/528110",
+        "https://music.apple.com/us/artist/travis/475835"
+      ],
+      "songs": [
+      ]
+    },
+    "taylor": {
+      "songsPerArtistCount": 30,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+      ],
+      "artists": [
+        "https://music.apple.com/us/artist/taylor-swift/159260351"
+      ],
+      "songs": [
+      ]
+    },
+    "gardenmix": {
+      "songsPerArtistCount": 1,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/us/playlist/pop-hits-2010/pl.e5afef10eb2544d0a38880fd8e2c9a27",
+        "https://music.apple.com/de/playlist/90er-pop-essentials/pl.0d70b7c9be8e4e0b95ebbf5578aaf7a2",
+        "https://music.apple.com/de/playlist/pop-rewind/pl.f642b91321c94b8d995689d0651cc2c6"
       ],
       "artists": [
       ],
