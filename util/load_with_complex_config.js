@@ -6,29 +6,11 @@ const { JSDOM } = jsdom;
 const limiter = require('limiter');
 const { RateLimiter } = limiter;
 
-const rooms = require('../config').rooms;
+const config = require('../config');
+const rooms = config.rooms;
 const { songsClientOptions } = require('../redis-config');
 songsClientOptions.legacyMode = false;
 const songsClient = require('redis').createClient(songsClientOptions);
-
-const config = {
-    pop: {
-        'songsPerArtistCount': 1,
-        'songsPerArtistSort': 'popular', // popular or recent
-        'artistsFromPlaylist': [
-            'https://music.apple.com/de/playlist/pop-rewind/pl.f642b91321c94b8d995689d0651cc2c6'
-        ],
-        'songsFromPlaylist': [
-            'https://music.apple.com/de/playlist/pop-rewind/pl.f642b91321c94b8d995689d0651cc2c6'
-        ],
-        'artists': [
-            'https://music.apple.com/us/artist/blur/528564'
-        ],
-        'songs': [
-            'https://music.apple.com/de/song/stay/1574968888'
-        ]
-    }
-}
 
 const limiterITunes = new RateLimiter({ tokensPerInterval: 1, interval: 500 }); // interval in ms
 const limiterAppleMusic = new RateLimiter({ tokensPerInterval: 1, interval: "second" });
@@ -129,6 +111,7 @@ async function readConfig(config) {
 }
 
 async function readRoom(roomName, roomConfig) {
+    console.log(`Loading songs for room ${roomName}...`);
     // get artist from playlists
     const artistsFromPlaylists = await getArtistUrlsFromPlaylistUrls(roomConfig.artistsFromPlaylist);
     console.log(`${artistsFromPlaylists.length} artist urls determined from playlist urls.`);
@@ -172,7 +155,7 @@ async function run() {
     await songsClient.del(rooms);
 
     console.log('Loading sample tracks... ');
-    await readConfig(config);
+    await readConfig(config.songs);
     console.log('Finished loading sample tracks.');
 
     await songsClient.disconnect();

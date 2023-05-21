@@ -1,6 +1,42 @@
 {
   "gameswithnorepeats": 3,
   "port": 8138,
-  "rooms": ["pop"],
+  "rooms": [
+    "pop",
+    "kates-pop"
+  ],
+  "songs": {
+    "pop": {
+      "songsPerArtistCount": 1,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+        "https://music.apple.com/de/playlist/pop-rewind/pl.f642b91321c94b8d995689d0651cc2c6"
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/de/playlist/pop-rewind/pl.f642b91321c94b8d995689d0651cc2c6"
+      ],
+      "artists": [
+        "https://music.apple.com/us/artist/blur/528564"
+      ],
+      "songs": [
+        "https://music.apple.com/de/song/stay/1574968888"
+      ]
+    },
+    "kates-pop": {
+      "songsPerArtistCount": 1,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/de/playlist/10er-hits-essentials/pl.6b1b5dfda067443481265436811002f1",
+        "https://music.apple.com/de/playlist/90er-pop-essentials/pl.0d70b7c9be8e4e0b95ebbf5578aaf7a2",
+        "https://music.apple.com/de/playlist/00er-pop-essentials/pl.e50ccee7318043eaaf8e8e28a2a55114"
+      ],
+      "artists": [
+      ],
+      "songs": [
+      ]
+    }
+  },
   "songsinarun": 15
 }
