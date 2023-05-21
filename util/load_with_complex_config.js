@@ -13,8 +13,8 @@ const songsClient = require('redis').createClient(songsClientOptions);
 let songId = 0;
 
 const config = {
-    britpop: {
-        'songsPerArtistCount': 3,
+    pop: {
+        'songsPerArtistCount': 1,
         'songsPerArtistSort': 'popular', // popular or recent
         'artistsFromPlaylist': [
             'https://music.apple.com/de/playlist/pop-rewind/pl.f642b91321c94b8d995689d0651cc2c6'
