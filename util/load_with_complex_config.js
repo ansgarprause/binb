@@ -106,14 +106,14 @@ async function insertTrack(roomName, track, songId) {
 
     await songsClient.v4.hSet(
         'song:' + songId,
-        ...Object.entries({
+        {
             'artistName': track.artistName,
             'trackName': track.trackName,
             'trackViewUrl': track.trackViewUrl,
             'previewUrl': track.previewUrl,
             'artworkUrl60': track.artworkUrl60,
             'artworkUrl100': track.artworkUrl100
-        })
+        }
     );
     
     const score = songId;
