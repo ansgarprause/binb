@@ -1,7 +1,8 @@
 const clientOptions = {
   url: process.env.REDIS_URL,
   // necessary for fly.io
-  family: 'IPv6'
+  family: 'IPv6',
+  legacyMode: true
 };
 
 const songsPrefix = 'songs:';
