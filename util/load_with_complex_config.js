@@ -10,8 +10,6 @@ const rooms = require('../config').rooms;
 const { songsClientOptions } = require('../redis-config');
 const songsClient = require('redis').createClient(songsClientOptions);
 
-let songId = 0;
-
 const config = {
     pop: {
         'songsPerArtistCount': 1,
@@ -31,7 +29,7 @@ const config = {
     }
 }
 
-const limiterITunes = new RateLimiter({ tokensPerInterval: 30, interval: 2000 }); // interval in ms
+const limiterITunes = new RateLimiter({ tokensPerInterval: 1, interval: 500 }); // interval in ms
 const limiterAppleMusic = new RateLimiter({ tokensPerInterval: 1, interval: "second" });
 
 function extractId(url) {
@@ -101,7 +99,7 @@ async function getSongsByEntityUrlInBatches(artistUrls, limit, sort) {
     return (await Promise.all(promises)).flat();
 }
 
-async function insertTrack(roomName, track) {
+async function insertTrack(roomName, track, songId) {
     if (track.wrapperType === 'artist') {
         return;
     }
@@ -119,8 +117,7 @@ async function insertTrack(roomName, track) {
     );
     
     const score = songId;
-    await songsClient.v4.zAdd(roomName, [{score: songId, value: songId.toString()}]);
-    songId++;
+    await songsClient.v4.zAdd(roomName, [{score: score, value: songId.toString()}]);
 }
 
 async function readConfig(config) {
@@ -162,7 +159,7 @@ async function readRoom(roomName, roomConfig) {
     console.log(songs.map(song => song.trackViewUrl).join('\n'));
     // insert all songs with metadata into redis
 
-    const insertPromises = songs.map((song) => insertTrack(roomName, song));
+    const insertPromises = songs.map((song, songId) => insertTrack(roomName, song, songId));
     await Promise.all(insertPromises);
     console.log(`Finished loading for room ${roomName}`);
 }
