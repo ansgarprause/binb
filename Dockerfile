@@ -43,4 +43,4 @@ RUN npm run minify
 
 # Start the server by default, this can be overwritten at runtime
 # CMD [ "npm", "run", "start" ]
-CMD npm run import-data-v2; npm run start
+CMD npm run import-data; npm run start
