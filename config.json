@@ -4,8 +4,7 @@
   "rooms": [
     "pop",
     "kates-pop",
-    "britpop",
-    "classics"
+    "britpop"
   ],
   "songs": {
     "pop": {
@@ -54,20 +53,6 @@
         "https://music.apple.com/us/artist/supergrass/391069",
         "https://music.apple.com/us/artist/the-verve/528110",
         "https://music.apple.com/us/artist/travis/475835"
-      ],
-      "songs": [
-      ]
-    },
-    "classics": {
-      "songsPerArtistCount": 3,
-      "songsPerArtistSort": "popular",
-      "artistsFromPlaylist": [
-      ],
-      "songsFromPlaylist": [
-        "https://music.apple.com/de/playlist/70s-hits-essentials/pl.1745c21b5f084936ad637b4cd5cbd99a?l=en",
-        "https://music.apple.com/de/playlist/60s-hits-essentials/pl.405e6f67264a4a44ba1b0c3a787c78b8?l=en"
-      ],
-      "artists": [
       ],
       "songs": [
       ]
