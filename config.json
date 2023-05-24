@@ -4,7 +4,8 @@
   "rooms": [
     "pop",
     "kates-pop",
-    "britpop"
+    "britpop",
+    "classics"
   ],
   "songs": {
     "pop": {
@@ -53,6 +54,24 @@
         "https://music.apple.com/us/artist/supergrass/391069",
         "https://music.apple.com/us/artist/the-verve/528110",
         "https://music.apple.com/us/artist/travis/475835"
+      ],
+      "songs": [
+      ]
+    },
+    "classics": {
+      "songsPerArtistCount": 3,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/de/playlist/the-beatles-essentials/pl.59619449a71f44dc99c4dabd6c442d41",
+        "https://music.apple.com/de/playlist/elton-john-essentials/pl.72ee689fe3f84ce2b46a6913c2e6f5f1",
+        "https://music.apple.com/de/playlist/fleetwood-mac-essentials/pl.647db163f3f84ccd9a839e5b6e4f34a2",
+        "https://music.apple.com/de/playlist/joni-mitchell-essentials/pl.3b292f389d2740d2adc06b6b9fd37db5",
+        "https://music.apple.com/de/playlist/70s-hits-essentials/pl.1745c21b5f084936ad637b4cd5cbd99a",
+        "https://music.apple.com/de/playlist/60s-hits-essentials/pl.405e6f67264a4a44ba1b0c3a787c78b8"
+      ],
+      "artists": [
       ],
       "songs": [
       ]
