@@ -28,11 +28,14 @@ exports.leaderboards = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      usersClient.sort(utils.sortParams(0), function(err, timesresults) {
+      usersClient.sort(utils.sortParams(0), function (err, timesresults) {
         if (err) {
           return next(err);
         }
-        const leaderboards = utils.buildLeaderboards(pointsresults, timesresults);
+        const leaderboards = utils.buildLeaderboards(
+          pointsresults,
+          timesresults
+        );
         res.locals.slogan = utils.randomSlogan();
         res.render('leaderboards', leaderboards);
       });
@@ -63,7 +66,7 @@ exports.sliceLeaderboard = function (req, res, next) {
     );
     return;
   }
-  usersClient.sort(utils.sortParams(begin), function(err, results) {
+  usersClient.sort(utils.sortParams(begin), function (err, results) {
     if (err) {
       return next(err);
     }
@@ -137,17 +140,21 @@ exports.changePasswd = function (req, res, next) {
     .update(salt + req.body.newpassword)
     .digest('hex');
 
-  usersClient.hset(key, ...Object.keys({'salt': salt, 'password': digest}), function (err) {
-    if (err) {
-      return next(err);
+  usersClient.hset(
+    key,
+    ...Object.keys({ salt: salt, password: digest }),
+    function (err) {
+      if (err) {
+        return next(err);
+      }
+      // Regenerate the session
+      req.session.regenerate(function () {
+        req.session.cookie.maxAge = 604800000; // One week
+        req.session.user = user;
+        res.redirect(followup);
+      });
     }
-    // Regenerate the session
-    req.session.regenerate(function () {
-      req.session.cookie.maxAge = 604800000; // One week
-      req.session.user = user;
-      res.redirect(followup);
-    });
-  });
+  );
 };
 
 /**
@@ -450,7 +457,8 @@ exports.resetPasswd = function (req, res, next) {
         .digest('hex');
 
       usersClient.hset(
-        user, ...Object.keys({'salt': salt, 'password': digest}),
+        user,
+        ...Object.keys({ salt: salt, password: digest }),
         function (err) {
           if (err) {
             return next(err);
