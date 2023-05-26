@@ -19,6 +19,11 @@ FROM base as build
 # Install packages needed to build node modules
 RUN apt-get update -qq
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    fc-list && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # RUN apt-get update -qq && \
 #     apt-get install -y python-is-python3 pkg-config build-essential 
 
