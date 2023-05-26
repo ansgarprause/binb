@@ -20,7 +20,7 @@ FROM base as build
 RUN apt-get update -qq
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    fc-list && \
+    fontconfig && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
