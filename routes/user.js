@@ -142,7 +142,7 @@ exports.changePasswd = function (req, res, next) {
 
   usersClient.hset(
     key,
-    ...Object.keys({ salt: salt, password: digest }),
+    ...Object.entries({ salt: salt, password: digest }),
     function (err) {
       if (err) {
         return next(err);
@@ -458,7 +458,7 @@ exports.resetPasswd = function (req, res, next) {
 
       usersClient.hset(
         user,
-        ...Object.keys({ salt: salt, password: digest }),
+        ...Object.entries({ salt: salt, password: digest }),
         function (err) {
           if (err) {
             return next(err);
