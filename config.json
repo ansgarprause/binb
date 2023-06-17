@@ -11,6 +11,8 @@
     "latest-pop": {
       "songsPerArtistCount": 1,
       "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
       "songsFromPlaylist": [
         "https://music.apple.com/us/playlist/pop-hits-2022/pl.8668bb7c2fdb4ee99de8704fc48123ac",
         "https://music.apple.com/us/playlist/a-list-pop/pl.5ee8333dbe944d9f9151e97d92d1ead9",
