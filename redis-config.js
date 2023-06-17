@@ -1,7 +1,6 @@
 const clientOptions = {
   url: process.env.REDIS_URL,
-  // necessary for fly.io
-  family: 'IPv6',
+  family: process.env.REDIS_FAMILY,
   legacyMode: true
 };
 
