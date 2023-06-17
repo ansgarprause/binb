@@ -2,26 +2,24 @@
   "gameswithnorepeats": 3,
   "port": 8138,
   "rooms": [
-    "pop",
+    "latest-pop",
     "kates-pop",
     "britpop",
     "classics"
   ],
   "songs": {
-    "pop": {
+    "latest-pop": {
       "songsPerArtistCount": 1,
       "songsPerArtistSort": "popular",
-      "artistsFromPlaylist": [
-        "https://music.apple.com/de/playlist/pop-rewind/pl.f642b91321c94b8d995689d0651cc2c6"
-      ],
       "songsFromPlaylist": [
-        "https://music.apple.com/de/playlist/pop-rewind/pl.f642b91321c94b8d995689d0651cc2c6"
+        "https://music.apple.com/us/playlist/pop-hits-2022/pl.8668bb7c2fdb4ee99de8704fc48123ac",
+        "https://music.apple.com/us/playlist/a-list-pop/pl.5ee8333dbe944d9f9151e97d92d1ead9",
+        "https://music.apple.com/us/playlist/pop-playlist-2023/pl.8041a56e48ac4650aa0bb67aff6194c6",
+        "https://music.apple.com/us/playlist/hits-2023-todays-hits/pl.f8f5a99597794dcfac4bc206bf309c93"
       ],
       "artists": [
-        "https://music.apple.com/us/artist/blur/528564"
       ],
       "songs": [
-        "https://music.apple.com/de/song/stay/1574968888"
       ]
     },
     "kates-pop": {
