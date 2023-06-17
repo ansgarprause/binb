@@ -396,7 +396,7 @@ exports.sendEmail = function (req, res, next) {
         if (err) {
           return next(err);
         }
-        console.info(`Password reset request for user ${req.body.email}: https://binb.jpautz.de/resetpasswd?token=${token}`);
+        console.info(`Password reset request for user ${req.body.email}: https://binb.fly.dev/resetpasswd?token=${token}`);
         mailer.sendEmail(req.body.email, token, function (err) {
           if (err) {
             console.error(err.message);

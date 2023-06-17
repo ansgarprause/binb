@@ -1,8 +1,8 @@
-![binb](https://raw.githubusercontent.com/noutbuk/binb/master/public/img/binb-logo.png)
+![binb](https://raw.githubusercontent.com/ansgarprause/binb/master/public/img/binb-logo.png)
 
 binb is a simple, realtime, multiplayer, competitive music listening game.
 
-To play the game: [https://binb.jpautz.de](https://binb.jpautz.de)
+To play the game: [https://binb.fly.dev](https://binb.fly.dev)
 
 ## Installation
 
@@ -60,12 +60,6 @@ binb requires a browser that supports the WebSocket protocol.
 
 Refer to this [table](http://caniuse.com/websockets) for details on
 compatibility.
-
-## Bug tracker
-
-Have a bug? Please create an [issue](https://github.com/noutbuk/binb/issues) here
-on GitHub, with a description of the problem, how to reproduce it and in what
-browser it occurred.
 
 ## Copyright and license
 

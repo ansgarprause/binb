@@ -2,9 +2,8 @@
   "name": "binb",
   "version": "1.2.0",
   "description": "Competitive, multiplayer, realtime, guess the song game",
-  "homepage": "https://binb.jpautz.de",
-  "bugs": "https://github.com/noutbuk/binb/issues",
-  "repository": "noutbuk/binb",
+  "homepage": "https://binb.fly.dev",
+  "repository": "ansgarprause/binb",
   "author": "Luigi Pinca",
   "license": "MIT",
   "scripts": {
