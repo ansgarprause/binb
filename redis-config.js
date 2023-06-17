@@ -1,6 +1,6 @@
 const clientOptions = {
   url: process.env.REDIS_URL,
-  family: process.env.REDIS_FAMILY,
+  family: process.env.REDIS_FAMILY || 'IPv4',
   legacyMode: true
 };
 
