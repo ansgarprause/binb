@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Adjust NODE_VERSION as desired
-ARG NODE_VERSION=16.16.0
+ARG NODE_VERSION=18
 FROM node:${NODE_VERSION}-slim as base
 
 LABEL fly_launch_runtime="NodeJS"
@@ -36,9 +36,16 @@ RUN npm prune --production
 # Final stage for app image
 FROM base
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    fontconfig && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy built application
 COPY --from=build /app /app
 
+RUN npm run minify
+
 # Start the server by default, this can be overwritten at runtime
 # CMD [ "npm", "run", "start" ]
-CMD npm run import-data; npm run minify; npm run start
+CMD npm run import-data; npm run start

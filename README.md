@@ -1,4 +1,4 @@
-![binb](https://raw.githubusercontent.com/lpinca/binb/master/public/img/binb-logo.png)
+![binb](https://raw.githubusercontent.com/ansgarprause/binb/master/public/img/binb-logo.png)
 
 binb is a simple, realtime, multiplayer, competitive music listening game.
 
@@ -10,7 +10,6 @@ Unless previously installed you'll need the following packages:
 
 - [Node.js](http://nodejs.org/)
 - [Redis](http://redis.io/)
-- [Cairo](http://cairographics.org/)
 
 Please use their sites to get detailed installation instructions.
 
@@ -61,16 +60,6 @@ binb requires a browser that supports the WebSocket protocol.
 
 Refer to this [table](http://caniuse.com/websockets) for details on
 compatibility.
-
-## Shout out to
-
-- [beatquest.fm](http://beatquest.fm) for inspiration.
-
-## Bug tracker
-
-Have a bug? Please create an [issue](https://github.com/lpinca/binb/issues) here
-on GitHub, with a description of the problem, how to reproduce it and in what
-browser it occurred.
 
 ## Copyright and license
 

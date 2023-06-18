@@ -22,21 +22,23 @@ for (let i = 0; i < rooms.length; i++) {
  */
 
 exports.leaderboards = function (req, res, next) {
-  usersClient.zrevrange(
-    ['users', 0, 29, 'withscores'],
+  usersClient.zrange(
+    ['users', 0, 29, 'rev', 'withscores'],
     function (err, pointsresults) {
       if (err) {
         return next(err);
       }
-      // usersClient.sort(utils.sortParams(0), function(err, timesresults) {
-      //   if (err) {
-      //     return next(err);
-      //   }
-      //   const leaderboards = utils.buildLeaderboards(pointsresults, timesresults);
-      //   res.locals.slogan = utils.randomSlogan();
-      //   res.render('leaderboards', leaderboards);
-      // });
-      res.render('leaderboards', utils.buildLeaderboards([], []));
+      usersClient.sort(utils.sortParams(0), function (err, timesresults) {
+        if (err) {
+          return next(err);
+        }
+        const leaderboards = utils.buildLeaderboards(
+          pointsresults,
+          timesresults
+        );
+        res.locals.slogan = utils.randomSlogan();
+        res.render('leaderboards', leaderboards);
+      });
     }
   );
 };
@@ -53,8 +55,8 @@ exports.sliceLeaderboard = function (req, res, next) {
   }
   const end = begin + 29;
   if (by === 'points') {
-    usersClient.zrevrange(
-      ['users', begin, end, 'withscores'],
+    usersClient.zrange(
+      ['users', begin, end, 'rev', 'withscores'],
       function (err, results) {
         if (err) {
           return next(err);
@@ -64,13 +66,12 @@ exports.sliceLeaderboard = function (req, res, next) {
     );
     return;
   }
-  // usersClient.sort(utils.sortParams(begin), function(err, results) {
-  //   if (err) {
-  //     return next(err);
-  //   }
-  //   res.send(results);
-  // });
-  res.send([]);
+  usersClient.sort(utils.sortParams(begin), function (err, results) {
+    if (err) {
+      return next(err);
+    }
+    res.send(results);
+  });
 };
 
 /**
@@ -139,17 +140,21 @@ exports.changePasswd = function (req, res, next) {
     .update(salt + req.body.newpassword)
     .digest('hex');
 
-  usersClient.hmset([key, 'salt', salt, 'password', digest], function (err) {
-    if (err) {
-      return next(err);
+  usersClient.hset(
+    key,
+    ...Object.entries({ salt: salt, password: digest }),
+    function (err) {
+      if (err) {
+        return next(err);
+      }
+      // Regenerate the session
+      req.session.regenerate(function () {
+        req.session.cookie.maxAge = 604800000; // One week
+        req.session.user = user;
+        res.redirect(followup);
+      });
     }
-    // Regenerate the session
-    req.session.regenerate(function () {
-      req.session.cookie.maxAge = 604800000; // One week
-      req.session.user = user;
-      res.redirect(followup);
-    });
-  });
+  );
 };
 
 /**
@@ -330,7 +335,7 @@ exports.createAccount = function (req, res, next) {
 
   // Add new user in the db
   const multi = usersClient.multi();
-  multi.hmset(userkey, user);
+  multi.hset(userkey, ...Object.entries(user));
   multi.set(mailkey, userkey);
   multi.zadd('users', 0, req.body.username);
   multi.sadd('emails', req.body.email);
@@ -391,6 +396,7 @@ exports.sendEmail = function (req, res, next) {
         if (err) {
           return next(err);
         }
+        console.info(`Password reset request for user ${req.body.email}: https://binb.fly.dev/resetpasswd?token=${token}`);
         mailer.sendEmail(req.body.email, token, function (err) {
           if (err) {
             console.error(err.message);
@@ -451,8 +457,9 @@ exports.resetPasswd = function (req, res, next) {
         .update(salt + req.body.password)
         .digest('hex');
 
-      usersClient.hmset(
-        [user, 'salt', salt, 'password', digest],
+      usersClient.hset(
+        user,
+        ...Object.entries({ salt: salt, password: digest }),
         function (err) {
           if (err) {
             return next(err);

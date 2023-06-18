@@ -8,7 +8,7 @@ To initiate the password reset process for your binb
 account, click the link below:
 
 
-https://binb.co/resetpasswd?token=<token>
+https://binb.fly.dev/resetpasswd?token=<token>
 
 
 If you can't click it, please copy and paste the URL in a
