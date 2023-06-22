@@ -5,7 +5,14 @@
     "latest-pop",
     "kates-pop",
     "britpop",
-    "classics"
+    "classics",
+    "60er",
+    "70er",
+    "80er",
+    "90er",
+    "2000er",
+    "2010er",
+    "2020er"
   ],
   "songs": {
     "latest-pop": {
@@ -70,6 +77,104 @@
         "https://music.apple.com/de/playlist/joni-mitchell-essentials/pl.3b292f389d2740d2adc06b6b9fd37db5",
         "https://music.apple.com/de/playlist/70s-hits-essentials/pl.1745c21b5f084936ad637b4cd5cbd99a",
         "https://music.apple.com/de/playlist/60s-hits-essentials/pl.405e6f67264a4a44ba1b0c3a787c78b8"
+      ],
+      "artists": [
+      ],
+      "songs": [
+      ]
+    },
+    "60er": {
+      "songsPerArtistCount": 3,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/us/playlist/60s-hits-essentials/pl.405e6f67264a4a44ba1b0c3a787c78b8",
+        "https://music.apple.com/us/playlist/60s-hits-top-100-songs/pl.0b6b81bd62514312b3af959923e83cba"
+      ],
+      "artists": [
+      ],
+      "songs": [
+      ]
+    },
+    "70er": {
+      "songsPerArtistCount": 3,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/us/playlist/70s-hits-essentials/pl.1745c21b5f084936ad637b4cd5cbd99a",
+        "https://music.apple.com/us/playlist/70s-hits-top-100-songs/pl.20c9a597a72d461991496b962dde10a7"
+      ],
+      "artists": [
+      ],
+      "songs": [
+      ]
+    },
+    "80er": {
+      "songsPerArtistCount": 3,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/us/playlist/80s-hits-essentials/pl.af4d982795c6472ea48579eb147cd726",
+        "https://music.apple.com/us/playlist/80s-hits-top-100-songs/pl.f68f14135e0b4b3eb42eb5776100f064"
+      ],
+      "artists": [
+      ],
+      "songs": [
+      ]
+    },
+    "90er": {
+      "songsPerArtistCount": 3,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/us/playlist/90s-hits-essentials/pl.0d70b7c9be8e4e0b95ebbf5578aaf7a2",
+        "https://music.apple.com/us/playlist/90s-hits-top-100-songs/pl.44a4495927924a25ab206edbd50420a3"
+      ],
+      "artists": [
+      ],
+      "songs": [
+      ]
+    },
+    "2000er": {
+      "songsPerArtistCount": 3,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/us/playlist/2000s-hits-essentials/pl.e50ccee7318043eaaf8e8e28a2a55114",
+        "https://music.apple.com/us/playlist/pop-hits-2000/pl.8842025aab5a4ae9ad13bb3f5ee7516b"
+      ],
+      "artists": [
+      ],
+      "songs": [
+      ]
+    },
+    "2010er": {
+      "songsPerArtistCount": 3,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/us/playlist/pop-hits-2010/pl.e5afef10eb2544d0a38880fd8e2c9a27",
+        "https://music.apple.com/us/playlist/2010s-hits-essentials/pl.6b1b5dfda067443481265436811002f1"
+      ],
+      "artists": [
+      ],
+      "songs": [
+      ]
+    },
+    "2020er": {
+      "songsPerArtistCount": 3,
+      "songsPerArtistSort": "popular",
+      "artistsFromPlaylist": [
+      ],
+      "songsFromPlaylist": [
+        "https://music.apple.com/us/playlist/pop-hits-2020/pl.adc231109c184fc691d8b78bf28217de",
+        "https://music.apple.com/us/playlist/todays-hits-2020/pl.f3024d8de1a542b0b8e581a5593f5e02"
       ],
       "artists": [
       ],
