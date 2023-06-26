@@ -90,7 +90,10 @@
       ],
       "songsFromPlaylist": [
         "https://music.apple.com/us/playlist/60s-hits-essentials/pl.405e6f67264a4a44ba1b0c3a787c78b8",
-        "https://music.apple.com/us/playlist/60s-hits-top-100-songs/pl.0b6b81bd62514312b3af959923e83cba"
+        "https://music.apple.com/us/playlist/60s-hits-top-100-songs/pl.0b6b81bd62514312b3af959923e83cba",
+        "https://music.apple.com/de/playlist/60er-rock-essentials/pl.b734256d1aff4569a8f24b8333e10888",
+        "https://music.apple.com/de/playlist/sing-60er/pl.32deef8ac2f74c129041283c0c3b498c",
+        "https://music.apple.com/de/playlist/60er-hard-rock-essentials/pl.462cd74ff6234e48957aecf14f4927ab"
       ],
       "artists": [
       ],
@@ -104,7 +107,12 @@
       ],
       "songsFromPlaylist": [
         "https://music.apple.com/us/playlist/70s-hits-essentials/pl.1745c21b5f084936ad637b4cd5cbd99a",
-        "https://music.apple.com/us/playlist/70s-hits-top-100-songs/pl.20c9a597a72d461991496b962dde10a7"
+        "https://music.apple.com/us/playlist/70s-hits-top-100-songs/pl.20c9a597a72d461991496b962dde10a7",
+        "https://music.apple.com/de/playlist/70er-rock-essentials/pl.36f59f5fe93e4a1dbdf460c211f08699",
+        "https://music.apple.com/de/playlist/70er-soul-essentials/pl.4f554d1db9a54b2fa314a8f4d5783169",
+        "https://music.apple.com/de/playlist/70er-softrock-essentials/pl.0358a7e75626484fbd96f36d4302cbaf",
+        "https://music.apple.com/de/playlist/70er-hard-rock-essentials/pl.9087d64ae6f540c8a3870f8e14461e4c",
+        "https://music.apple.com/de/playlist/70er-singer-songwriter-essentials/pl.0e675aa6a1e147aaa15b8695d19dc9e4"
       ],
       "artists": [
       ],
